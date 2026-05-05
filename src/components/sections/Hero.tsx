@@ -1,16 +1,11 @@
 "use client";
 
-import { useRef, useEffect, Suspense } from "react";
+import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { site } from "@/config/theme";
 import { Magnetic, Reveal, TextReveal } from "@/components/effects/Animations";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
-import dynamic from "next/dynamic";
-
-const HeroScene = dynamic(
-  () => import("@/components/effects/HeroScene").then((mod) => mod.HeroScene),
-  { ssr: false }
-);
+import { HeroScene } from "@/components/effects/HeroScene";
 
 export function Hero() {
   const ref = useRef(null);
@@ -21,9 +16,7 @@ export function Hero() {
       ref={ref}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      <Suspense fallback={<div className="absolute inset-0" />}>
       <HeroScene />
-    </Suspense>
 
       <div className="absolute inset-0 gradient-mesh" />
 

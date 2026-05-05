@@ -1,6 +1,5 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { useSmoothScroll } from "@/lib/hooks";
 import { Navbar } from "@/components/layout/Navbar";
 import { ScrollProgress } from "@/components/layout/ScrollProgress";
@@ -10,19 +9,9 @@ import { Projects } from "@/components/sections/Projects";
 import { About } from "@/components/sections/About";
 import { Experience } from "@/components/sections/Experience";
 import { Contact } from "@/components/sections/Contact";
-
-const CustomCursor = dynamic(
-  () => import("@/components/effects/CustomCursor").then((m) => m.CustomCursor),
-  { ssr: false }
-);
-const LightOrbs = dynamic(
-  () => import("@/components/effects/LightOrbs").then((m) => m.LightOrbs),
-  { ssr: false }
-);
-const GrainOverlay = dynamic(
-  () => import("@/components/effects/GrainOverlay").then((m) => m.GrainOverlay),
-  { ssr: false }
-);
+import { CustomCursor } from "@/components/effects/CustomCursor";
+import { LightOrbs } from "@/components/effects/LightOrbs";
+import { GrainOverlay } from "@/components/effects/GrainOverlay";
 
 export default function Home() {
   useSmoothScroll();
