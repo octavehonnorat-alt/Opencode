@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+import type { Lenis } from "lenis";
 
 interface UseMagneticOptions {
   strength?: number;
@@ -58,10 +59,10 @@ export function useMagnetic(options: UseMagneticOptions = {}) {
 }
 
 export function useSmoothScroll() {
-  const lenisRef = useRef<any>(null);
+  const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    let lenis: any;
+    let lenis: Lenis | undefined;
     let raf: number;
 
     const init = async () => {

@@ -1,12 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
+import type { ComponentType, SVGProps } from "react";
 import { Magnetic } from "@/components/effects/Animations";
 import { site } from "@/config/theme";
 import { ArrowUp } from "lucide-react";
 import { GithubIcon, LinkedInIcon, XTwitterIcon, DribbbleIcon } from "@/components/ui/BrandIcons";
 
-const socialLinks: Array<{ icon: any; href: string; label: string }> = [
+type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
+
+const socialLinks: Array<{ icon: IconComponent; href: string; label: string }> = [
   { icon: GithubIcon, href: site.social.github, label: "GitHub" },
   { icon: LinkedInIcon, href: site.social.linkedin, label: "LinkedIn" },
   { icon: XTwitterIcon, href: site.social.twitter, label: "X (Twitter)" },
