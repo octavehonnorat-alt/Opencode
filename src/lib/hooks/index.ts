@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import type { Lenis } from "lenis";
 
 interface UseMagneticOptions {
   strength?: number;
@@ -59,10 +58,10 @@ export function useMagnetic(options: UseMagneticOptions = {}) {
 }
 
 export function useSmoothScroll() {
-  const lenisRef = useRef<Lenis | null>(null);
+  const lenisRef = useRef<unknown>(null);
 
   useEffect(() => {
-    let lenis: Lenis | undefined;
+    let lenis: unknown;
     let raf: number;
 
     const init = async () => {
@@ -71,11 +70,11 @@ export function useSmoothScroll() {
         duration: 1.2,
         easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         smoothWheel: true,
-      });
+      }) as { raf: (t: number) => void; destroy: () => void };
       lenisRef.current = lenis;
 
       const update = (time: number) => {
-        lenis.raf(time);
+        (lenis as { raf: (t: number) => void }).raf(time);
         raf = requestAnimationFrame(update);
       };
       raf = requestAnimationFrame(update);
@@ -85,7 +84,7 @@ export function useSmoothScroll() {
 
     return () => {
       if (raf) cancelAnimationFrame(raf);
-      if (lenis) lenis.destroy();
+      if (lenis) (lenis as { destroy: () => void }).destroy();
     };
   }, []);
 
