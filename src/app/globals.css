@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-midnight: oklch(0.12 0.01 260);
+  --color-midnight-deep: oklch(0.08 0.015 260);
+  --color-lunar: oklch(0.97 0.005 260);
+  --color-lunar-soft: oklch(0.94 0.005 260);
+  --color-warm: oklch(0.55 0.01 260);
+  --color-warm-light: oklch(0.70 0.008 260);
+  --color-accent: oklch(0.65 0.15 250);
+  --color-accent-soft: oklch(0.75 0.08 250);
+  --color-accent-glow: oklch(0.70 0.18 250);
+  --color-glass: oklch(0.97 0.005 260 / 0.06);
+  --color-glass-border: oklch(0.97 0.005 260 / 0.12);
+
+  --font-display: "Playfair Display", "Georgia", serif;
+  --font-body: "Instrument Sans", "system-ui", sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: oklch(0.08 0.015 260);
+  color: oklch(0.97 0.005 260);
+}
+
+body {
+  font-family: var(--font-body);
+  background: oklch(0.08 0.015 260);
+  color: oklch(0.97 0.005 260);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: oklch(0.65 0.15 250 / 0.4);
+  color: oklch(0.97 0.005 260);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: oklch(0.08 0.015 260);
+}
+
+::-webkit-scrollbar-thumb {
+  background: oklch(0.25 0.01 260);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.35 0.01 260);
+}
+
+.text-display {
+  font-family: var(--font-display);
+}
+
+.text-body {
+  font-family: var(--font-body);
+}
+
+.text-mono {
+  font-family: var(--font-mono);
+}
+
+.max-line-length {
+  max-width: 65ch;
+}
+
+.glass {
+  background: oklch(0.97 0.005 260 / 0.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid oklch(0.97 0.005 260 / 0.08);
+}
+
+.glass-strong {
+  background: oklch(0.97 0.005 260 / 0.08);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid oklch(0.97 0.005 260 / 0.12);
+}
+
+.glow {
+  box-shadow: 0 0 40px oklch(0.65 0.15 250 / 0.15),
+    0 0 80px oklch(0.65 0.15 250 / 0.05);
+}
+
+.glow-text {
+  text-shadow: 0 0 40px oklch(0.65 0.15 250 / 0.3),
+    0 0 80px oklch(0.65 0.15 250 / 0.1);
+}
+
+.gradient-mesh {
+  background: 
+    radial-gradient(ellipse at 20% 50%, oklch(0.65 0.15 250 / 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, oklch(0.55 0.12 280 / 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, oklch(0.60 0.10 200 / 0.05) 0%, transparent 50%);
+}
+
+.noise {
+  position: relative;
+}
+
+.noise::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(1deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -10%); }
+  20% { transform: translate(-15%, 5%); }
+  30% { transform: translate(7%, -25%); }
+  40% { transform: translate(-5%, 25%); }
+  50% { transform: translate(-15%, 10%); }
+  60% { transform: translate(15%, 0%); }
+  70% { transform: translate(0%, 15%); }
+  80% { transform: translate(3%, 35%); }
+  90% { transform: translate(-10%, 10%); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
